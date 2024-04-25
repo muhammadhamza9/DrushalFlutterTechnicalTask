@@ -44,13 +44,13 @@ class _HomePageForTodoListState extends State<HomePageForTodoList> {
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.done),
-                      onPressed: ctr.todos[index].isCompleted == false
-                          ? () {}
-                          : () {
-                              ctr.todos[index].isCompleted =
-                                  !ctr.todos[index].isCompleted;
-                            },
+                      icon: ctr.todos[index].isCompleted == true
+                          ? const Icon(Icons.close)
+                          : const Icon(Icons.done),
+                      onPressed: () {
+                        ctr.toggleCompleted(index);
+                        setState(() {});
+                      },
                     ),
                   );
                 },
@@ -58,6 +58,7 @@ class _HomePageForTodoListState extends State<HomePageForTodoList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _textEditingController.clear();
           showDialog(
             context: context,
             builder: (context) {
