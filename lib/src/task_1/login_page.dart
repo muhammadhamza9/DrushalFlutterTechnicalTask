@@ -13,6 +13,15 @@ class _LoginPageState extends State<LoginPage> {
   final passCtr = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
+
+  String password = "123456";
+  String email = "abc@xyz.com";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +73,19 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (ctx) => const HomePage()),
-                      (route) => false,
-                    );
+                    if (emailCtr.text == email && passCtr.text == password) {
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (ctx) => const HomePage()),
+                        (route) => false,
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                              Text('Please enter a valid email and password'),
+                        ),
+                      );
+                    }
                   }
                 },
                 child: const Text('Login'),

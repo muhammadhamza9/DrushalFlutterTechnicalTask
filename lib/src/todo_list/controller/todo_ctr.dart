@@ -17,6 +17,7 @@ class TodoCtr extends GetxController {
 
   void toggleCompleted(int index) {
     todos[index].isCompleted = !todos[index].isCompleted;
+    log('message');
   }
 
   void addTodo(String title, {bool? isComplete}) {

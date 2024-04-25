@@ -26,7 +26,14 @@ class _HomePageForTodoListState extends State<HomePageForTodoList> {
                 itemCount: ctr.todos.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text('Todo ${index + 1}'),
+                    title: Text(
+                      'Todo ${index + 1}',
+                      style: TextStyle(
+                        decoration: ctr.todos[index].isCompleted == true
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                      ),
+                    ),
                     leading: IconButton(
                       onPressed: () {
                         ctr.removeTodo(index);
@@ -35,6 +42,15 @@ class _HomePageForTodoListState extends State<HomePageForTodoList> {
                         Icons.delete,
                         color: Colors.red,
                       ),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.done),
+                      onPressed: ctr.todos[index].isCompleted == false
+                          ? () {}
+                          : () {
+                              ctr.todos[index].isCompleted =
+                                  !ctr.todos[index].isCompleted;
+                            },
                     ),
                   );
                 },
